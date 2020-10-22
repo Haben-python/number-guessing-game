@@ -19,13 +19,16 @@ def start_game():
     highscore = []
     #Prompts user for a guess and evaluates if that guess is either lower, higher, or equivalent to the correct answer
     while True:
+        #Checks for any errors and displays specifically that error to user
         try:
-            guess = input("Please guess a number between 1 and 10: ")
-            guess = int(guess)
-        except ValueError:
-            print("'{}' is a invalid value please choose a number (Digit value) 1-10".format(guess))
+            guess = int(input("Please guess a number between 1 and 10: "))
+            if guess >= 11 or guess < 1:
+                raise Exception("Invalid value. {} is not in range of 1-10 ".format(guess))
+        except ValueError as err:
+            print("Invalid value. Please choose a numerical value")
+        except Exception as out_of_range_error:
+            print(out_of_range_error)
         else:
-
             attempts += 1
             if guess > answer:
                 print("It's lower")
